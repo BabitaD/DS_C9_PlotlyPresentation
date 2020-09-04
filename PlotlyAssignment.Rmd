@@ -1,0 +1,30 @@
+---
+title: "Interactive Plot using Plotly"
+author: "Babita"
+date: "5 September 2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Multi Line Graph
+### Dataset: EuStockMarkets
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(tidyr)
+library(dplyr)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+data("EuStockMarkets")
+stocks <- as.data.frame(EuStockMarkets) %>%
+  gather(index, price) %>%
+  mutate(time = rep(time(EuStockMarkets), 4))
+plot_ly(stocks, x = ~time, y = ~price, color = ~index, type = "scatter", mode = "lines")
+```
+
+
+
